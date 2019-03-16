@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                @*<a class="navbar-brand" href="#">Navbar</a>*@
+                @Html.ActionLink("Outage Data Portal -WK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            @Html.ActionLink("Outage List", "Index", "Outage", new { @class = "navbar-brand" })
+                        </li>
+                        <li class="nav-item">
+                        <li>@Html.ActionLink("Add Outage", "Add", "Outage", new { @class = "navbar-brand" })</li>
+                            @*<a class="nav-link" href="#">Features</a>*@
+                        </li>
+                        <li class="nav-item">
+                        <li>@Html.ActionLink("Availability Report", "TotalAvailability", "Outage", new { @class = "navbar-brand" })</li>
+                            @*<a class="nav-link" href="#">Pricing</a>*@
+                        </li>
+                        <li class="nav-item">
+                        <li>@Html.ActionLink("Add Application Availability", "AddAvailability", "Outage", new { @class = "navbar-brand" })</li>
+                        </li>
+                    </ul>
+                    
+            </nav>
+            @*<div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Outage Data Portal -WK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Outage List", "Index", "Outage")</li>
+                    <li>@Html.ActionLink("Add Outage", "Add", "Outage")</li>
+                    <li>@Html.ActionLink("Availability Report", "TotalAvailability", "Outage")</li>
+                </ul>
+            </div>*@
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - WK Outage Data Portal</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

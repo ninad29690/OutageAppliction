@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ApplicationOutage.Outage>
+
+@{
+    ViewBag.Title = "Incident Report";
+}
+
+<h2>Incident Report</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayName("Total Outage")
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Impact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Component)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Application.ApplicationName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+
+            @{
+                double min = (item.EndDate - item.StartDate).TotalMinutes;
+             }
+           @min
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Impact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Component)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Application.ApplicationName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

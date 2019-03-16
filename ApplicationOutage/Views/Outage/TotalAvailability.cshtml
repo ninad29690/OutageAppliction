@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Total Avialablilty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TotalOutage</h2>
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Years", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Years", (IEnumerable<SelectListItem>)ViewBag.Years, htmlAttributes: new { @class = "form-control", onchange = "SelectedIndexChanged()" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Months", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Months", (IEnumerable<SelectListItem>)ViewBag.Months, htmlAttributes: new { @class = "form-control", onchange = "SelectedIndexChanged()" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Total Avialablilty", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("TotalAvialablilty", "", htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+    function SelectedIndexChanged() {
+        $('#TotalAvialablilty').val(0);
+        var dataObject = JSON.stringify({
+            'Year': $('#Years').val(),
+            'Month': $('#Months').val(),
+        });
+        $.ajax({
+            url: 'TotalAvailability',
+            type: 'POST',
+            contentType: 'application/json;',
+            data: dataObject,
+            success: function (result) {
+                if (result) {
+                    let value = 0;
+                    if (result != "undefined") {
+                        value = result.outage;
+                    }
+                    $('#TotalAvialablilty').val(value);
+                } else {
+                    alert("Error")
+                }
+            }
+        });
+    }
+</script>
+}
